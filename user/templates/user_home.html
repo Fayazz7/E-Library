@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% include "userheader.html" %}
+    <!-- Bootstrap CSS link -->
+    
+    
+</head>
+<body>
+    {%include 'usernav.html'%}
+        
+                <div class="row mt-lg-5 mt-md-3 mt-sm-2">
+                    <div class="col-lg-3 col-4">
+
+                    </div>
+                    <div class="col-lg-6 col-4">
+                        <form action="" method="post">
+                            {%csrf_token%}
+                            <div class="d-flex">
+                                <input type="text" class="form-control me-2" placeholder="Search" name="book">
+                                <button type="submit" class="d-flex btn btn-success "> Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-4 col-4">
+
+                    </div>
+                </div>
+            
+
+    <div class="row ms-lg-5 ms-md-3 ms-sm-2 me-2 mt-3 ">
+        {% for bk in books %}
+        <div class="card m-2 " style="max-width: 450px;">
+            <div class="row no-gutters">
+                <div class="col-md-4 justify-content-center p-0 ">
+                    <img src="{{bk.cover.url}}" class="card-img" alt="Book Cover" >
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"> {{bk.name}} </h5>
+                        <p><h6> {{bk.author}} </h6></p>
+                        <p>Genre: {{bk.genres}} </p>
+                        <p>Released: {{bk.released}} </p>
+                        <div class=" d-flex justify-content-evenly mt-3 ">
+                            <a href=" {%url 'bk-view' bk.id  %} " class="btn btn-outline-primary ">Detail View</a>
+                            <a href=" " class="btn btn-danger" >Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

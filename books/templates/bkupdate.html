@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book-Add</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{%static 'css/addform.css'%}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+    <!-- MDB -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    {%if form.errors%}
+    {{form.errors}}
+    {%endif%}
+    <!-- Navigation Bar -->
+    
+    <div class="container ">
+        
+        <h2 class="mb-4">Update Book</h2>
+
+        <form  method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <!-- Book Name -->
+                <div class="col-md-6 mb-3">
+                    <label for="bookName">Book Name</label>
+                    <input type="text" class="form-control" id="bookName" name="name" placeholder="Enter book name" value="{{data.name.value}}">
+                </div>
+
+                <!-- Author -->
+                <div class="col-md-6 mb-3">
+                    <label for="author">Author</label>
+                    <input type="text" class="form-control" id="author" name="author" placeholder="Enter author name" value="{{data.author.value}}">
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Genres -->
+                <div class="col-md-6 mb-3">
+                    <label for="genres">Genres</label>
+                    <input type="text" class="form-control" id="genres" name="genres" placeholder="Enter genres (comma-separated)"
+                     value="{{data.genres.value}}">
+                </div>
+
+                <!-- Publisher -->
+                <div class="col-md-6 mb-3">
+                    <label for="publisher">Publisher</label>
+                    <input type="text" class="form-control" id="publisher" name="publisher" placeholder="Enter publisher" value="{{data.publisher.value}}">
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Image Field -->
+                <div class="col-md-6 mb-3">
+                    <label for="image">Book Cover Image URL</label>
+                    <input type="file" class="form-control" id="image" name="cover" placeholder="Enter image URL" value="{{data.cover.value}}">
+                </div>
+
+                <!-- Publish Date -->
+                <div class="col-md-6 mb-3">
+                    <label for="publishDate">Publish Date</label>
+                    <input type="date" class="form-control" name="released" id="publishDate" value="{{data.released.value}}">
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- File -->
+                <div class="col-md-12 mb-3">
+                    <label for="file">Book File</label>
+                    <input type="file" class="form-control" name="file" id="file" value="{{data.file.value}}" >
+                </div>
+                <!-- About -->
+                <div class="col-md-12 mb-3">
+                    <label for="about">About the Book</label>
+                    <textarea class="form-control" id="about" rows="3" name="about" value="{{data.about.value}}"
+                        placeholder="Enter a brief description about the book" >{{data.about.value}}</textarea>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button  type="submit" class="btn btn-primary">Update Book</button>
+                <a href="{% url 'home' %}" class="btn btn-primary">View Books</a>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
